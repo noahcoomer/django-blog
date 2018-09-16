@@ -3,6 +3,8 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.urls import reverse
+from django.utils.dateparse import parse_datetime
+import datetime
 
 
 class Blog(models.Model):
@@ -16,13 +18,18 @@ class Blog(models.Model):
     length = models.IntegerField()
 
     def __str__(self):
-        return (self.title)
+        return self.title
 
     def __unicode__(self):
         return '%s' % self.title
 
     def get_absolute_url(self):
-        url = reverse('view_post', kwargs={'slug': self.slug})
+        url = reverse('view_post', kwargs={
+            'slug': self.slug,
+            'year': self.posted.year,
+            'month': self.posted.month,
+            'day': self.posted.day
+        })
         return url
 
 
@@ -49,3 +56,19 @@ class Author(models.Model):
 
     def __unicode__(self):
         return '%s' % self.name
+
+
+class Comment(models.Model):
+    post = models.ForeignKey('blog.Blog', on_delete=models.CASCADE, related_name='comments')
+    author = models.CharField(max_length=40)
+    text = models.TextField()
+    created_date = models.DateTimeField(db_index=True, auto_now_add=True)
+    approved_comment = models.BooleanField(default=False)
+
+    def approve(self):
+        self.approved_comment = True
+        self.save()
+
+    def __str__(self):
+        return self.text
+
