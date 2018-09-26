@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Blog, Category, Author, Comment
+from .models import Blog, Category, Author, Comment, AudioFile
 
 class BlogAdmin(admin.ModelAdmin):
     exclude = ['posted']
@@ -18,3 +18,4 @@ admin.site.register(Blog)
 admin.site.register(Category)
 admin.site.register(Author)
 admin.site.register(Comment)
+admin.site.register(AudioFile)

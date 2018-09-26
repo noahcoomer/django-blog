@@ -7,6 +7,7 @@ from django.utils.dateparse import parse_datetime
 import datetime
 
 
+# Blog Posts Model
 class Blog(models.Model):
     title = models.CharField(max_length=100, unique=True)
     slug = models.CharField(max_length=100, unique=True)
@@ -33,6 +34,7 @@ class Blog(models.Model):
         return url
 
 
+# Category Query Model
 class Category(models.Model):
     title = models.CharField(max_length=100, db_index=True)
     slug = models.SlugField(max_length=100, db_index=True)
@@ -48,6 +50,7 @@ class Category(models.Model):
         return url
 
 
+# Author Information Model
 class Author(models.Model):
     name = models.CharField(max_length=100, db_index=True)
 
@@ -58,6 +61,7 @@ class Author(models.Model):
         return '%s' % self.name
 
 
+# Base Comment Model
 class Comment(models.Model):
     post = models.ForeignKey('blog.Blog', on_delete=models.CASCADE, related_name='comments')
     author = models.CharField(max_length=40)
@@ -71,4 +75,9 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.text
+
+
+# Base Audio File Model
+class AudioFile(models.Model):
+    specifications = models.FileField(upload_to='router_specifications')
 

@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from datetime import date
-from django.shortcuts import render, get_object_or_404, redirect, HttpResponseRedirect
+from django.shortcuts import render, get_object_or_404, HttpResponseRedirect
 from .models import Blog, Category
 from .forms import CommentForm
 
@@ -23,6 +23,7 @@ ARCHIVE_STRS = [
 
 
 def index(request):
+    # create the archive objects on the right side of the screen
     arch = Blog.objects.dates('posted', 'month', order='DESC')
     archives = {}
 
@@ -31,11 +32,10 @@ def index(request):
         month = a.month
 
         try:
-            #archives[year].append(month)
+            # archives[year].append(month)
             print()
         except KeyError:
             print()
-
     print(archives)
 
 
@@ -74,3 +74,5 @@ def view_category(request, slug):
         'posts': Blog.objects.filter(category=category)[:5]
     })
 
+#def view_archive(request, year, month):
+    #posts = Blog.objects.
