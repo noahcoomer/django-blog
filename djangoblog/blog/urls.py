@@ -8,4 +8,6 @@ urlpatterns = [
     path('view/<int:year>/<int:month>/<int:day>/<slug:slug>.html', views.view_post, name='view_post'),
     # view categories
     path('category/<slug:slug>.html', views.view_category, name='view_category'),
+    # view archives
+    path('view/<int:year>/<int:month>/', views.view_archive, name='view_archive'),
 ]

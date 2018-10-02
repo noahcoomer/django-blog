@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
+{% load month_index %}
+
 
 {% block title %}
-    Django Blog
+    Blog | C2C
 {% endblock %}
 
 
@@ -84,10 +86,12 @@
                     <h4>Archives</h4>
                     <ol class="list-unstyled">
                         {% for year, month_list in archives %}
-
+                            {% for month in month_list %}
+                                <li><a href="view/{{ year }}/{{ month }}/">{{ months|month_index:month }} {{ year }}</a></li>
+                            {% endfor %}
                         {% endfor %}
 
-                        <li><a href="#">September 2018</a></li>
+                        <!--<li><a href="#">September 2018</a></li>-->
                     </ol>
                 </div>
                 <div class="sidebar-module">

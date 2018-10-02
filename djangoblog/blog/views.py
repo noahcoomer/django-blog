@@ -28,22 +28,22 @@ def index(request):
     archives = {}
 
     for a in arch:
-        year = a.year
+        year = str(a.year)
         month = a.month
 
-        try:
-            # archives[year].append(month)
-            print()
-        except KeyError:
-            print()
-    print(archives)
+        if year not in archives:
+            archives[year] = []
+
+        if month not in archives[year]:
+            archives[year].append(month)
 
 
     return render(request, 'blog_index.html', {
         'nav': 'blog',
         'categories': Category.objects.all(),
         'posts': Blog.objects.all()[:5],
-        'archives': sorted(archives.items(), reverse=True)
+        'archives': sorted(archives.items(), reverse=True),
+        'months': ARCHIVE_STRS,
     })
 
 
@@ -74,5 +74,19 @@ def view_category(request, slug):
         'posts': Blog.objects.filter(category=category)[:5]
     })
 
-#def view_archive(request, year, month):
-    #posts = Blog.objects.
+
+def view_archive(request, year, month):
+    posts = []
+    arch = Blog.objects.dates('posted', 'month', order='DESC')
+    for a in arch:
+        if year == a.year:
+            if month == a.month:
+                posts.append(a)
+
+    header = ARCHIVE_STRS[month-1] + ' ' + str(year)
+
+    return render(request, 'view_archive.html', {
+        'nav': 'blog',
+        'posts': posts,
+        'header': header,
+    })
