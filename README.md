@@ -2,11 +2,7 @@
 
 A Django-powered blog. Feel free to fork and use this boilerplate code as you wish!
 
-## Notes
-
-Currently, the master branch is tracking a client project so branding has been applied. 
-
-### Installation
+## Installation
 
 *This documentation assumes that you already have `pip` installed in your system.*
 
@@ -18,3 +14,7 @@ Currently, the master branch is tracking a client project so branding has been a
 
 3. Get the server up
     - `$ python djangoblog/manage.py runserver`
+   
+## Notes
+
+Currently, the master branch is tracking a client project so branding has been applied. 
