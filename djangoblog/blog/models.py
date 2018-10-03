@@ -16,7 +16,6 @@ class Blog(models.Model):
     # this field can be changed to .manyToMany() to support multiple categories
     category = models.ForeignKey('blog.Category', on_delete=models.CASCADE)
     author = models.ForeignKey('blog.Author', on_delete=models.CASCADE)
-    length = models.IntegerField()
 
     def __str__(self):
         return self.title
@@ -79,5 +78,10 @@ class Comment(models.Model):
 
 # Base Audio File Model
 class AudioFile(models.Model):
+    specifications = models.FileField(upload_to='router_specifications')
+
+
+# Base Video File Model
+class VideoFile(models.Model):
     specifications = models.FileField(upload_to='router_specifications')
 

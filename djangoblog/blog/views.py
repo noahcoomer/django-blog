@@ -76,12 +76,10 @@ def view_category(request, slug):
 
 
 def view_archive(request, year, month):
-    posts = []
-    arch = Blog.objects.dates('posted', 'month', order='DESC')
-    for a in arch:
-        if year == a.year:
-            if month == a.month:
-                posts.append(a)
+
+    print(month)
+    posts = Blog.objects.filter(posted__year=year,
+                                posted__month=month)
 
     header = ARCHIVE_STRS[month-1] + ' ' + str(year)
 
