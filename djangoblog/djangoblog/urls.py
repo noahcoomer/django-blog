@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 import home.views
+import contact.views
 from . import views
 
 urlpatterns = [
@@ -23,6 +24,7 @@ urlpatterns = [
     path('', home.views.home_index, name='index'),
     path('blog/', include('blog.urls')),
     path('about/', views.about, name='about'),
-    path('contact/', views.contact, name='contact'),
+    path('contact/', contact.views.contact, name='contact'),
     path('legal/', views.legal, name='legal'),
+    path('captcha/', include('captcha.urls')),
 ]
