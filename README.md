@@ -1,8 +1,12 @@
 # Django Blog
 
-A Django-powered blog.
+A Django-powered blog. Feel free to fork and use this boilerplate code as you wish!
 
-## Installation
+## Notes
+
+Currently, the master branch is tracking a client project so branding has been applied. 
+
+### Installation
 
 *This documentation assumes that you already have `pip` installed in your system.*
 
